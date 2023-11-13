@@ -1,22 +1,30 @@
 class PromoteRateCalculator {
   #date;
 
-  SPECIAL_PROMOE_DATE = [3, 10, 17, 24, 31];
+  #totalPrice;
 
-  PRESENT_PRICE = 120000;
+  #totalPromtionPrice = 0;
 
-  WEEK_DISCOUNT = 2023;
+  #eventBage = '없음';
 
-  totalPromtionPrice = 0;
+  #benefitDetail;
 
-  benefitDetail;
-
-  eventBage = '없음';
-
-  constructor(totalPrice, orderMenu, date) {
-    this.totalPrice = totalPrice;
+  constructor(totalPrice, orderMenus, date) {
+    this.#totalPrice = totalPrice;
     this.#date = date;
-    this.orderMenu = orderMenu;
+    this.orderMenus = orderMenus;
+  }
+
+  getEventBadget() {
+    return this.#eventBage;
+  }
+
+  getBenefitDetail() {
+    return this.#benefitDetail;
+  }
+
+  getTotalPromtionPrice() {
+    return this.#totalPromtionPrice;
   }
 
   start() {
@@ -26,18 +34,16 @@ class PromoteRateCalculator {
   }
 
   checkEventBadge() {
-    const { totalPromtionPrice } = this;
-
-    if (totalPromtionPrice > 20000) {
-      this.eventBage = '산타';
+    if (this.#totalPromtionPrice > 20000) {
+      this.#eventBage = '산타';
       return;
     }
-    if (totalPromtionPrice > 10000) {
-      this.eventBage = '트리';
+    if (this.#totalPromtionPrice > 10000) {
+      this.#eventBage = '트리';
       return;
     }
-    if (totalPromtionPrice > 5000) {
-      this.eventBage = '별';
+    if (this.#totalPromtionPrice > 5000) {
+      this.#eventBage = '별';
     }
   }
 
@@ -52,13 +58,13 @@ class PromoteRateCalculator {
       `증정 이벤트: -${present.toLocaleString()}원`,
     ];
 
-    this.benefitDetail = benefitDetail;
+    this.#benefitDetail = benefitDetail;
   }
 
   totalBenefitPrice() {
     const { weekend, christmas, special, present } = this.getTotalBenefits();
 
-    this.totalPromtionPrice = weekend + christmas + special + present;
+    this.#totalPromtionPrice = weekend + christmas + special + present;
   }
 
   getTotalBenefits() {
@@ -74,33 +80,34 @@ class PromoteRateCalculator {
   }
 
   weekendDiscount() {
+    const WEEK_DISCOUNT = 2023;
     const isHoliday = this.isWeekend();
     const category = isHoliday ? '디저트' : '메인';
-    const menus = this.orderMenu[category];
-
+    const menus = this.orderMenus.filter(
+      menu => menu.getCategory() === category,
+    );
     if (!menus) return 0;
-
     const totalDiscount = menus.reduce((acc, cur) => {
-      const price = cur.quantity * this.WEEK_DISCOUNT;
+      const price = cur.quantity * WEEK_DISCOUNT;
       return acc + price;
     }, 0);
-
     return totalDiscount;
   }
 
   christmas() {
     if (this.#date > 25) return 0;
 
-    const startPrice = 1000;
-    const promotionPrice = 100;
+    const START_PRICE = 1000;
+    const PROMOTION_PRICE = 100;
     const date = this.#date - 1;
-    const resultPrice = startPrice + date * promotionPrice;
+    const resultPrice = START_PRICE + date * PROMOTION_PRICE;
 
     return resultPrice;
   }
 
   special() {
-    const isSpecial = this.SPECIAL_PROMOE_DATE.includes(this.#date);
+    const SPECIAL_PROMOE_DATE = [3, 10, 17, 24, 31];
+    const isSpecial = SPECIAL_PROMOE_DATE.includes(this.#date);
 
     return isSpecial ? 1000 : 0;
   }
@@ -113,7 +120,9 @@ class PromoteRateCalculator {
   }
 
   present() {
-    if (this.totalPrice > this.PRESENT_PRICE) {
+    const PRESENT_LIMIT_PRICE = 120000;
+
+    if (this.#totalPrice > PRESENT_LIMIT_PRICE) {
       return 25000;
     }
 
