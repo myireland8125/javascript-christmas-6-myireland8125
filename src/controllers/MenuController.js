@@ -70,9 +70,7 @@ class MenuController {
 
   setOrderMenus(orderMenus, item, category) {
     const { name: itenName, price } = item;
-    const matchedMenu = orderMenus.find(
-      orderMenu => orderMenu.name === itenName,
-    );
+    const matchedMenu = this.findMathedMenu(orderMenus, itenName);
 
     if (!matchedMenu) {
       return;
@@ -83,6 +81,14 @@ class MenuController {
 
     this.#orderMenus.push(menuModel);
     this.setOrderCategory(category);
+  }
+
+  findMathedMenu(orderMenus, itenName) {
+    const matchedMenu = orderMenus.find(
+      orderMenu => orderMenu.name === itenName,
+    );
+
+    return matchedMenu;
   }
 
   setOrderCategory(category) {
