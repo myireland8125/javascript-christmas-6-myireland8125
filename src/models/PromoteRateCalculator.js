@@ -83,17 +83,25 @@ class PromoteRateCalculator {
   }
 
   weekendDiscount() {
-    const WEEK_DISCOUNT = 2023;
     const isHoliday = this.isWeekend();
     const category = isHoliday ? '디저트' : '메인';
     const menus = this.orderMenus.filter(
       menu => menu.getCategory() === category,
     );
     if (!menus) return 0;
+
+    const totalDiscount = this.calculateMenuPrice(menus);
+    return totalDiscount;
+  }
+
+  calculateMenuPrice(menus) {
+    const WEEK_DISCOUNT = 2023;
+
     const totalDiscount = menus.reduce((acc, cur) => {
       const price = cur.quantity * WEEK_DISCOUNT;
       return acc + price;
     }, 0);
+
     return totalDiscount;
   }
 
