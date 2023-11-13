@@ -1,3 +1,5 @@
+import BADGES from '../datas/eventBadge.js';
+
 class PromoteRateCalculator {
   #date;
 
@@ -34,16 +36,17 @@ class PromoteRateCalculator {
   }
 
   checkEventBadge() {
-    if (this.#totalPromtionPrice > 20000) {
-      this.#eventBage = '산타';
+    const { star, tree, santa } = BADGES;
+    if (this.#totalPromtionPrice > santa.limitPrice) {
+      this.#eventBage = santa.label;
       return;
     }
-    if (this.#totalPromtionPrice > 10000) {
-      this.#eventBage = '트리';
+    if (this.#totalPromtionPrice > tree.limitPrice) {
+      this.#eventBage = tree.label;
       return;
     }
-    if (this.#totalPromtionPrice > 5000) {
-      this.#eventBage = '별';
+    if (this.#totalPromtionPrice > star.limitPrice) {
+      this.#eventBage = star.label;
     }
   }
 
