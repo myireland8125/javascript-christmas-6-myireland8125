@@ -48,10 +48,10 @@ class ResultController {
   printTotalBenefitPrice() {
     const { printMessage } = OutputView;
 
-    const presnetPrice = 25000;
     const totalPromtionPrice =
       this.promoteRateCalculator.getTotalPromtionPrice();
-    const resultPrice = this.#totalPrice - totalPromtionPrice + presnetPrice;
+    const { present } = this.promoteRateCalculator.getTotalBenefits();
+    const resultPrice = this.#totalPrice - totalPromtionPrice + present;
 
     printMessage(
       `<총혜택 금액>\n -${totalPromtionPrice.toLocaleString()}원 \n`,
