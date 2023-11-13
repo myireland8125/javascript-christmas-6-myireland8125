@@ -85,6 +85,7 @@ class PromoteRateCalculator {
   weekendDiscount() {
     const isHoliday = this.isWeekend();
     const category = isHoliday ? '디저트' : '메인';
+
     const menus = this.orderMenus.filter(
       menu => menu.getCategory() === category,
     );
@@ -98,7 +99,8 @@ class PromoteRateCalculator {
     const WEEK_DISCOUNT = 2023;
 
     const totalDiscount = menus.reduce((acc, cur) => {
-      const price = cur.quantity * WEEK_DISCOUNT;
+      const { quantity } = cur.getMenu();
+      const price = quantity * WEEK_DISCOUNT;
       return acc + price;
     }, 0);
 
