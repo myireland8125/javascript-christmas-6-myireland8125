@@ -5,7 +5,7 @@ import ResultController from './ResultController.js';
 import PromoteRateCalculator from '../models/PromoteRateCalculator.js';
 
 class PromotionController {
-  promoteRateCalculator;
+  #promoteRateCalculator;
 
   constructor() {
     this.menuController = new MenuController();
@@ -26,18 +26,18 @@ class PromotionController {
   calculate() {
     const { totalPrice, orderMenus, date } = this.getPromoteDatas();
 
-    this.promoteRateCalculator = new PromoteRateCalculator(
+    this.#promoteRateCalculator = new PromoteRateCalculator(
       totalPrice,
       orderMenus,
       date,
     );
-    this.promoteRateCalculator.start();
+    this.#promoteRateCalculator.start();
   }
 
   print() {
     const { totalPrice, orderMenus } = this.getPromoteDatas();
     const resultController = new ResultController(
-      this.promoteRateCalculator,
+      this.#promoteRateCalculator,
       totalPrice,
       orderMenus,
     );

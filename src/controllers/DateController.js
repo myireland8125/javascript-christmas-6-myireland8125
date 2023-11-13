@@ -11,8 +11,9 @@ class DateController {
     try {
       const selectedDate = await this.propmtDate();
       const selecteNumberDate = Number(selectedDate);
+      const date = new Date(selecteNumberDate).getDate();
 
-      this.#date = new Date(selecteNumberDate);
+      this.#date = date;
     } catch (error) {
       printMessage('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
       await this.setPromoteDate();
@@ -24,7 +25,8 @@ class DateController {
   }
 
   getDate() {
-    return this.#date.getDate();
+    return this.#date;
   }
 }
+
 export default DateController;
