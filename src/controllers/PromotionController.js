@@ -15,15 +15,17 @@ class PromotionController {
 
   async start() {
     const { printMessage } = OutputView;
-    printMessage('안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.');
-    await this.setDatas();
 
+    printMessage('안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.');
+
+    await this.setDatas();
     this.calculate();
     this.print();
   }
 
   calculate() {
     const { totalPrice, orderMenus, date } = this.getPromoteDatas();
+
     this.promoteRateCalculator = new PromoteRateCalculator(
       totalPrice,
       orderMenus,
@@ -39,6 +41,7 @@ class PromotionController {
       totalPrice,
       orderMenus,
     );
+
     resultController.print();
   }
 

@@ -47,10 +47,10 @@ class ResultController {
 
   printTotalBenefitPrice() {
     const { printMessage } = OutputView;
+
     const presnetPrice = 25000;
     const totalPromtionPrice =
       this.promoteRateCalculator.getTotalPromtionPrice();
-
     const resultPrice = this.#totalPrice - totalPromtionPrice + presnetPrice;
 
     printMessage(

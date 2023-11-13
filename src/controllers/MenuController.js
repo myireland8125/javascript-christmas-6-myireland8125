@@ -37,8 +37,8 @@ class MenuController {
       this.#orderCategory,
       this.#orderMenus,
     );
-
     const totalPrice = promoteMenuManager.getTotalPrice();
+
     return totalPrice;
   }
 
