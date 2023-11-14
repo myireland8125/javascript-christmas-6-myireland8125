@@ -1,4 +1,7 @@
 import BADGES from '../datas/eventBadge.js';
+import { EVENT_DATA, WEEK, MENU_CATEGORY } from '../consts/event.js';
+
+const { specialEvent, christMasEvent, presentEvent, weekEvent } = EVENT_DATA;
 
 class PromoteRateCalculator {
   #date;
@@ -78,14 +81,16 @@ class PromoteRateCalculator {
     const present = this.present();
 
     const isHoliday = this.isWeekend();
-    const category = isHoliday ? '주말' : '평일';
+    const category = isHoliday ? WEEK.weekend : WEEK.weekdays;
 
     return { weekend, christmas, special, present, category };
   }
 
   weekendDiscount() {
+    const { main, dessert } = MENU_CATEGORY;
+
     const isHoliday = this.isWeekend();
-    const category = isHoliday ? '메인' : '디저트';
+    const category = isHoliday ? main : dessert;
 
     const menus = this.orderMenus.filter(
       menu => menu.getCategory() === category,
@@ -98,11 +103,11 @@ class PromoteRateCalculator {
   }
 
   calculateMenuPrice(menus) {
-    const WEEK_DISCOUNT = 2023;
+    const { discountPrice } = weekEvent;
 
     const totalDiscount = menus.reduce((acc, cur) => {
       const { quantity } = cur.getMenu();
-      const price = quantity * WEEK_DISCOUNT;
+      const price = quantity * discountPrice;
       return acc + price;
     }, 0);
 
@@ -110,21 +115,21 @@ class PromoteRateCalculator {
   }
 
   christmas() {
-    if (this.#date > 25) return 0;
+    const { limitDate, startPrice, discountPrice } = christMasEvent;
+    if (this.#date > limitDate) return 0;
 
-    const START_PRICE = 1000;
-    const PROMOTION_PRICE = 100;
     const date = this.#date - 1;
-    const resultPrice = START_PRICE + date * PROMOTION_PRICE;
+    const resultPrice = startPrice + date * discountPrice;
 
     return resultPrice;
   }
 
   special() {
-    const SPECIAL_PROMOE_DATE = [3, 10, 17, 24, 31];
-    const isSpecial = SPECIAL_PROMOE_DATE.includes(this.#date);
+    const { promoteDates, discountPrice } = specialEvent;
 
-    return isSpecial ? 1000 : 0;
+    const isSpecial = promoteDates.includes(this.#date);
+
+    return isSpecial ? discountPrice : 0;
   }
 
   isWeekend() {
@@ -135,10 +140,10 @@ class PromoteRateCalculator {
   }
 
   present() {
-    const PRESENT_LIMIT_PRICE = 120000;
+    const { champagne, limitPrice } = presentEvent;
 
-    if (this.#totalPrice > PRESENT_LIMIT_PRICE) {
-      return 25000;
+    if (this.#totalPrice > limitPrice) {
+      return champagne.price;
     }
 
     return 0;

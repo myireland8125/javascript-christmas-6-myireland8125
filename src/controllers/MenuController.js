@@ -4,6 +4,9 @@ import Menu from '../models/Menu.js';
 import OutputView from '../views/OutputView.js';
 import InputView from '../views/InputView.js';
 import PromoteMenuManager from '../models/PromoteMenuManager.js';
+import ERROR_MESSAGE from '../consts/errorMsg.js';
+
+const { inValidOrder } = ERROR_MESSAGE;
 
 class MenuController {
   #menuCategory;
@@ -27,7 +30,7 @@ class MenuController {
       const groupedMenus = this.createMenus(menus);
       this.createOrderMenus(groupedMenus);
     } catch (error) {
-      printMessage('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+      printMessage(inValidOrder);
       await this.setMenu();
     }
   }

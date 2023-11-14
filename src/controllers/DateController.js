@@ -1,6 +1,9 @@
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import Date from '../models/Date.js';
+import ERROR_MESSAGE from '../consts/errorMsg.js';
+
+const { inValidDate } = ERROR_MESSAGE;
 
 class DateController {
   #date;
@@ -15,7 +18,7 @@ class DateController {
 
       this.#date = date;
     } catch (error) {
-      printMessage('[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.');
+      printMessage(inValidDate);
       await this.setPromoteDate();
     }
   }

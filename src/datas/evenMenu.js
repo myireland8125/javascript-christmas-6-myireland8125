@@ -1,4 +1,4 @@
-const EVENT_MENU = {
+const EVENT_MENU = Object.freeze({
   애피타이저: [
     { name: '양송이수프', price: 6000 },
     { name: '타파스', price: 5500 },
@@ -19,6 +19,6 @@ const EVENT_MENU = {
     { name: '레드와인', price: 60000 },
     { name: '샴페인', price: 25000 },
   ],
-};
+});
 
 export default EVENT_MENU;

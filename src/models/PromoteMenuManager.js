@@ -1,3 +1,9 @@
+import ERROR_MESSAGE from '../consts/errorMsg.js';
+import { MENU_CATEGORY } from '../consts/event.js';
+
+const { drink } = MENU_CATEGORY;
+const { inValidOrder } = ERROR_MESSAGE;
+
 class PromoteMenuManager {
   #orderMenus;
 
@@ -10,8 +16,8 @@ class PromoteMenuManager {
   }
 
   #isOnlyDrink(orderCategory) {
-    if (orderCategory.length === 1 && orderCategory.includes('음료')) {
-      throw new Error('[ERROR] 음료만 주문은 불가능해요.');
+    if (orderCategory.length === 1 && orderCategory.includes(drink)) {
+      throw new Error(inValidOrder);
     }
   }
 

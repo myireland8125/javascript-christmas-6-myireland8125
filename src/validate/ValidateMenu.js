@@ -1,4 +1,7 @@
 import EVENT_MENU from '../datas/evenMenu.js';
+import ERROR_MESSAGE from '../consts/errorMsg.js';
+
+const { inValidOrder } = ERROR_MESSAGE;
 
 class ValidateMenu {
   constructor(menus) {
@@ -23,9 +26,7 @@ class ValidateMenu {
       );
 
       if (!isMenuIncluded) {
-        throw new Error(
-          '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
-        );
+        throw new Error(inValidOrder);
       }
     });
   }
@@ -39,7 +40,7 @@ class ValidateMenu {
     const sum = quantitys.reduce((acc, cur) => acc + cur, 0);
 
     if (sum >= 20) {
-      throw new Error('[ERROR] 20개 이상 주문할 수 없어요.');
+      throw new Error(inValidOrder);
     }
   }
 
@@ -48,16 +49,14 @@ class ValidateMenu {
     const uniqueMenus = [...new Set(newMenus)]; // 중복 제거
 
     if (uniqueMenus.length !== newMenus.length) {
-      throw new Error('[ERROR] 중복 메뉴는 포함 할 수 없어요.');
+      throw new Error(inValidOrder);
     }
   }
 
   #isNumber(quantitys) {
     quantitys.forEach(quantity => {
       if (!Number.isInteger(quantity) || quantity < 1) {
-        throw new Error(
-          '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
-        );
+        throw new Error(inValidOrder);
       }
     });
   }
@@ -67,9 +66,7 @@ class ValidateMenu {
 
     menus.forEach(item => {
       if (!pattern.test(item)) {
-        throw new Error(
-          '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
-        );
+        throw new Error(inValidOrder);
       }
     });
   }
