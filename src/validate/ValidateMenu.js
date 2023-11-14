@@ -1,4 +1,4 @@
-import menu from '../datas/menu';
+import menu from '../datas/menu.js';
 
 class ValidateMenu {
   constructor(menus) {
@@ -13,6 +13,7 @@ class ValidateMenu {
     this.#hasMenu(this.onlyMenus, this.menuCategory);
     this.#hasDuplicte(this.onlyMenus);
     this.#isNumber(this.onlyQuantity);
+    this.#isExceedingQuantity(this.onlyQuantity);
   }
 
   #hasMenu(menus, menuCategory) {
@@ -34,7 +35,7 @@ class ValidateMenu {
     return menus.some(item => item.name === name);
   }
 
-  isExceedingQuantity(quantitys) {
+  #isExceedingQuantity(quantitys) {
     const sum = quantitys.reduce((acc, cur) => acc + cur, 0);
 
     if (sum >= 20) {
