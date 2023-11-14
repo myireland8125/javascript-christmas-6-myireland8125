@@ -1,4 +1,4 @@
-import menu from '../datas/menu.js';
+import EVENT_MENU from '../datas/evenMenu.js';
 
 class ValidateMenu {
   constructor(menus) {
@@ -6,7 +6,7 @@ class ValidateMenu {
     this.#isValidateForm(this.menus);
     this.onlyMenus = menus.map(item => item.split('-')[0].trim());
     this.onlyQuantity = menus.map(item => Number(item.split('-')[1].trim()));
-    this.menuCategory = Object.keys(menu);
+    this.menuCategory = Object.keys(EVENT_MENU);
   }
 
   start() {
@@ -31,7 +31,7 @@ class ValidateMenu {
   }
 
   #isMenuIncludedInCategory(category, name) {
-    const menus = menu[category];
+    const menus = EVENT_MENU[category];
     return menus.some(item => item.name === name);
   }
 

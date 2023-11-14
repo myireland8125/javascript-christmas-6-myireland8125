@@ -1,4 +1,4 @@
-import menu from '../datas/menu.js';
+import EVENT_MENU from '../datas/evenMenu.js';
 import ValidateMenu from '../validate/ValidateMenu.js';
 import Menu from '../models/Menu.js';
 import OutputView from '../views/OutputView.js';
@@ -13,7 +13,7 @@ class MenuController {
   #orderCategory = [];
 
   constructor() {
-    this.#menuCategory = Object.keys(menu);
+    this.#menuCategory = Object.keys(EVENT_MENU);
   }
 
   async setMenu() {
@@ -62,7 +62,7 @@ class MenuController {
 
   createOrderMenus(orderMenus) {
     this.#menuCategory.forEach(category => {
-      menu[category].forEach(item => {
+      EVENT_MENU[category].forEach(item => {
         this.setOrderMenus(orderMenus, item, category);
       });
     });

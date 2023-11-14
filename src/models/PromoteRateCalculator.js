@@ -37,6 +37,7 @@ class PromoteRateCalculator {
 
   checkEventBadge() {
     const { star, tree, santa } = BADGES;
+
     if (this.#totalPromtionPrice > santa.limitPrice) {
       this.#eventBage = santa.label;
       return;
@@ -131,7 +132,6 @@ class PromoteRateCalculator {
     const day = new Date(`${promteDate}${this.#date}`).getDay();
 
     return day === 4 || day === 5;
-    //
   }
 
   present() {

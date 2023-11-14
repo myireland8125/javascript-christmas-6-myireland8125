@@ -1,4 +1,4 @@
-const menu = {
+const EVENT_MENU = {
   애피타이저: [
     { name: '양송이수프', price: 6000 },
     { name: '타파스', price: 5500 },
@@ -21,4 +21,4 @@ const menu = {
   ],
 };
 
-export default menu;
+export default EVENT_MENU;
