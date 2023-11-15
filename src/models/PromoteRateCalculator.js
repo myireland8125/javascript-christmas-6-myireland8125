@@ -136,7 +136,7 @@ class PromoteRateCalculator {
     const promteDate = '2023-12-';
     const day = new Date(`${promteDate}${this.#date}`).getDay();
 
-    return day === 4 || day === 5;
+    return day === 5 || day === 6;
   }
 
   present() {
