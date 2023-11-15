@@ -1,9 +1,20 @@
-# 기능명세서
+<div align='center'>
+<img src='https://velog.velcdn.com/images/seorim6417/post/a87b343b-bf97-4028-b360-d2a541110d46/image.png'/>
+
+# 4주차 미션 - 로또
+
+---
+
+우아한테크코스 웹 프론트엔드 6기, 로또 미션 저장소입니다.
+</div>
+
+# FEATURES
 
 [ 입력 ]
 
 1. 고객에게 12월중 방문할 날짜를 입력받는다.
-   1. 1이상 31이하의 숫자가 아닌 숫자를 입력하면 예외를 던진다.
+   1. 1이상 31이하의 숫자가 아닌 입력이 들어오면 예외를 던진다.
+      
 2. 주문할 메뉴와 갯수를 입력받는다. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)
    1. 메뉴판에 없는 메뉴를 주문할 경우 에러를 던진다.
    2. 메뉴 갯수는 1 이상이다.
@@ -34,7 +45,7 @@
 
 증정이벤트
 
-1. 할인 전 총 주문 금액이 12만워 이상이면 샴페인 1개를 증정한다.
+1. 할인 전 총 주문 금액이 12만원 이상이면 샴페인 1개를 증정한다.
 
 [ 이벤트 배지 ]
 
@@ -54,3 +65,50 @@
 4. 총 혜택 내역을 출력한다.
 5. 할인 후 예상 결제 금액을 출력한다.
 6. 이벤트 배지를 출력한다.
+
+# DOMAIN
+## Date
+| 속성 또는 메서드 | 설명 |
+| --- | --- |
+| #date | 날짜 정보를 저장하는 프라이빗 필드 |
+| constructor(date) | 주어진 날짜를 사용하여 Date 객체를 생성하고, 주어진 날짜의 유효성을 확인한다. |
+| #validtate(date) | 주어진 날짜의 유효성을 확인하는 프라이빗 메서드로, 날짜가 유효하지 않으면 에러를 발생시킨다. |
+| getDate() | 현재 Date 객체의 날짜 값을 반환한다. |
+
+## Menu
+| 속성 또는 메서드 | 설명 |
+| --- | --- |
+| #name | 메뉴의 이름을 저장하는 프라이빗 필드 |
+| #price | 메뉴의 가격을 저장하는 프라이빗 필드 |
+| #quantity | 메뉴의 수량을 저장하는 프라이빗 필드 |
+| #category | 메뉴의 카테고리를 저장하는 프라이빗 필드 |
+| constructor(name, price, quantity, category) | 주어진 이름, 가격, 수량, 카테고리로 Menu 객체를 생성한다. |
+| getMenu() | 현재 Menu 객체의 이름, 가격, 수량을 포함한 정보를 객체로 반환한다. |
+| getCategory() | 현재 Menu 객체의 카테고리 값을 반환한다. |
+
+# ****PromoteRateCalculator****
+
+### **Properties**
+
+| 속성 | 설명 |
+| --- | --- |
+| #date | 날짜 정보를 저장하는 private 필드 |
+| #totalPrice | 총 주문 가격을 저장하는 private 필드 |
+| #totalPromtionPrice | 총 혜택 금액을 저장하는 private 필드 |
+| #eventBage | 이벤트 배지 정보를 저장하는 private 필드 |
+| #benefitDetail | 혜택 상세 정보를 저장하는 private 필드 |
+
+### **Methods**
+
+| 메서드 | 설명 |
+| --- | --- |
+| constructor(totalPrice, orderMenus, date) | 총 주문 가격, 주문된 메뉴 목록, 날짜 정보를 이용하여 PromoteRateCalculator 객체를 생성한다. |
+| getEventBadget() | 이벤트 배지 정보를 반환한다. |
+| getBenefitDetail() | 혜택 상세 정보를 반환한다. |
+| getTotalPromtionPrice() | 총 혜택 금액을 반환한다. |
+| start() | 혜택 계산과 배지 확인을 수행한다. |
+| checkEventBadge() | 이벤트 배지를 확인하고, 총 혜택 금액에 따라 배지를 설정한다. |
+| totalBenefit() | 각종 혜택에 따른 할인 및 혜택 정보를 설정한다. |
+| totalBenefitPrice() | 각종 혜택에 따른 할인 및 혜택 금액을 총 혜택 금액에 합산한다. |
+| getTotalBenefits() | 주말 할인, 크리스마스 이벤트, 특별 이벤트, 증정 이벤트 등의 혜택을 확인하고 반환한다. |
+
