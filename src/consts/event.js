@@ -1,6 +1,6 @@
 const EVENT_DATA = Object.freeze({
   specialEvent: {
-    promoteDates: [3, 10, 17, 24, 31],
+    promoteDates: [3, 10, 17, 24, 25, 31],
     discountPrice: 1000,
   },
   christMasEvent: {
