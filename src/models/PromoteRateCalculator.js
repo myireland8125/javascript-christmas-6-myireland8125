@@ -96,7 +96,7 @@ class PromoteRateCalculator {
       menu => menu.getCategory() === category,
     );
 
-    if (!menus) return 0;
+    if (menus.length === 0) return 0;
 
     const totalDiscount = this.calculateMenuPrice(menus);
     return totalDiscount;
