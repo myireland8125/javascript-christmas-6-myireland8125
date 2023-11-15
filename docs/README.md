@@ -1,11 +1,11 @@
 <div align='center'>
 <img src='https://velog.velcdn.com/images/seorim6417/post/a87b343b-bf97-4028-b360-d2a541110d46/image.png'/>
 
-# 4주차 미션 - 로또
+# 4주차 미션 - 크리스마스 프로모션
 
 ---
 
-우아한테크코스 웹 프론트엔드 6기, 로또 미션 저장소입니다.
+우아한테크코스 웹 프론트엔드 6기, 크리스마스 프로모션 저장소입니다.
 </div>
 
 # FEATURES
